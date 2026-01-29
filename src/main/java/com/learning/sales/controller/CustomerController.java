@@ -42,4 +42,12 @@ public class CustomerController {
     public void addCustomer(@RequestBody @Valid CustomerRequestDto customerRequestDto) {
         customerService.addCustomer(customerRequestDto);
     }
+
+    @PutMapping("/{id}")
+    @Operation(summary = "Update Customer")
+    @ResponseStatus(HttpStatus.OK)
+    public void updateCustomer(@PathVariable long id, @RequestBody @Valid CustomerRequestDto customerRequestDto) {
+        customerService.updateCustomer(id, customerRequestDto);
+
+    }
 }
