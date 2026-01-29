@@ -26,4 +26,10 @@ public class CustomerController {
     public List<CustomerResponseDto> getCustomers() {
         return customerService.getAllCustomers();
     }
+
+    @GetMapping("/{id}")
+    @Operation(summary = "Get Customer By Id")
+    public CustomerResponseDto getCustomerById(long id) {
+        return customerService.getCustomerById(id);
+    }
 }
