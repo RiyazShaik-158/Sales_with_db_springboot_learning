@@ -2,8 +2,10 @@ package com.learning.sales.service.Impl;
 
 import com.learning.sales.dto.Customer.CustomerResponseDto;
 import com.learning.sales.entity.Customer;
+import com.learning.sales.exception.CustomerNotFoundError;
 import com.learning.sales.repo.CustomerRepo;
 import com.learning.sales.service.CustomerService;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -23,6 +25,12 @@ public class CustomerServiceImpl implements CustomerService {
         return originals.stream()
                 .map(this::mapToDto)
                 .toList();
+    }
+
+    @Override
+    public CustomerResponseDto getCustomerById(long id) {
+        Customer customer = customerRepo.findById(id).orElseThrow(() -> new CustomerNotFoundError( "Customer not found with id: " + id));
+        return mapToDto(customer);
     }
 
     private CustomerResponseDto mapToDto(Customer customer) {
