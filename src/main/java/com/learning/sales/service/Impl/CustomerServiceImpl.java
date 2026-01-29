@@ -44,6 +44,17 @@ public class CustomerServiceImpl implements CustomerService {
         customerRepo.save(customer);
     }
 
+    @Override
+    public void updateCustomer(long id, CustomerRequestDto customerRequestDto) {
+        Customer customer = customerRepo.findById(id).orElseThrow(() -> new CustomerNotFoundError( "Customer not found with id: " + id));
+        customer.setName(customerRequestDto.getName());
+        customer.setAddress(customerRequestDto.getAddress());
+        customer.setCity(customerRequestDto.getCity());
+        customer.setState(customerRequestDto.getState());
+        customer.setZip(customerRequestDto.getZip());
+        customerRepo.save(customer);
+    }
+
     private CustomerResponseDto mapToDto(Customer customer) {
         return new CustomerResponseDto(customer.getId(), customer.getName(), customer.getAddress(), customer.getCity(), customer.getState(), customer.getZip());
     }

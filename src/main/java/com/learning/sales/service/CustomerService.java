@@ -11,4 +11,6 @@ public interface CustomerService {
     CustomerResponseDto getCustomerById(long id);
 
     void addCustomer(CustomerRequestDto customerRequestDto);
+
+    void updateCustomer(long id ,CustomerRequestDto customerRequestDto);
 }
