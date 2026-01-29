@@ -1,12 +1,13 @@
 package com.learning.sales.controller;
 
+import com.learning.sales.dto.Customer.CustomerRequestDto;
 import com.learning.sales.dto.Customer.CustomerResponseDto;
 import com.learning.sales.service.CustomerService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import jakarta.validation.Valid;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -23,13 +24,22 @@ public class CustomerController {
 
     @GetMapping
     @Operation(summary = "Get All Customers")
+    @ResponseStatus(HttpStatus.OK)
     public List<CustomerResponseDto> getCustomers() {
         return customerService.getAllCustomers();
     }
 
     @GetMapping("/{id}")
     @Operation(summary = "Get Customer By Id")
+    @ResponseStatus(HttpStatus.OK)
     public CustomerResponseDto getCustomerById(long id) {
         return customerService.getCustomerById(id);
+    }
+
+    @PostMapping
+    @Operation(summary = "Add Customer")
+    @ResponseStatus(HttpStatus.CREATED)
+    public void addCustomer(@RequestBody @Valid CustomerRequestDto customerRequestDto) {
+        customerService.addCustomer(customerRequestDto);
     }
 }
