@@ -48,6 +48,12 @@ public class CustomerController {
     @ResponseStatus(HttpStatus.OK)
     public void updateCustomer(@PathVariable long id, @RequestBody @Valid CustomerRequestDto customerRequestDto) {
         customerService.updateCustomer(id, customerRequestDto);
+    }
 
+    @DeleteMapping("/{id}")
+    @Operation(summary = "Delete Customer by Id")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteCustomer(@PathVariable long id) {
+        customerService.deleteCustomer(id);
     }
 }
