@@ -55,6 +55,15 @@ public class CustomerServiceImpl implements CustomerService {
         customerRepo.save(customer);
     }
 
+    @Override
+    public void deleteCustomer(long id) {
+        if(customerRepo.existsById(id)) {
+            customerRepo.deleteById(id);
+        } else {
+            throw new CustomerNotFoundError( "Customer not found with id: " + id);
+        }
+    }
+
     private CustomerResponseDto mapToDto(Customer customer) {
         return new CustomerResponseDto(customer.getId(), customer.getName(), customer.getAddress(), customer.getCity(), customer.getState(), customer.getZip());
     }
