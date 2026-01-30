@@ -2,7 +2,7 @@ package com.learning.sales.service.Impl;
 
 import com.learning.sales.dto.Item.ItemResponseDto;
 import com.learning.sales.entity.Item;
-import com.learning.sales.exception.ItemNotFoundError;
+import com.learning.sales.exception.CustomerNotFoundError;
 import com.learning.sales.repo.ItemRepo;
 import com.learning.sales.service.ItemService;
 import org.springframework.stereotype.Service;
@@ -25,7 +25,7 @@ public class ItemServiceImpl implements ItemService {
 
     @Override
     public ItemResponseDto getItemById(long id) {
-        Item item = itemRepo.findById(id).orElseThrow(() -> new ItemNotFoundError("Item not found with id: " + id));
+        Item item = itemRepo.findById(id).orElseThrow(() -> new CustomerNotFoundError("Item not found with id: " + id));
         return mapToDto(item);
     }
 
