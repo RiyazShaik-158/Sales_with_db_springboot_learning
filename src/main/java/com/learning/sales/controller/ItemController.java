@@ -45,8 +45,16 @@ public class ItemController {
 
     @PutMapping("/{id}")
     @Operation(summary = "Update Item")
+    @ResponseStatus(HttpStatus.OK)
     public void updateItem(@PathVariable long id, @RequestBody ItemRequestDto itemRequestDto) {
         itemService.updateItem(id, itemRequestDto);
+    }
+
+    @DeleteMapping("/{id}")
+    @Operation(summary = "Delete item")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteItem(@PathVariable long id) {
+        itemService.deleteItem(id);
     }
 
 }
