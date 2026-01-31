@@ -1,6 +1,7 @@
 package com.learning.sales.controller;
 
 
+import com.learning.sales.dto.Item.ItemRequestDto;
 import com.learning.sales.dto.Item.ItemResponseDto;
 import com.learning.sales.service.ItemService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -34,4 +35,12 @@ public class ItemController {
     public ItemResponseDto getItemById(@PathVariable long id) {
         return itemService.getItemById(id);
     }
+
+    @PostMapping
+    @Operation(summary = "Add new Item")
+    @ResponseStatus(HttpStatus.CREATED)
+    public void addItem(@RequestBody ItemRequestDto itemRequestDto) {
+        itemService.addItem(itemRequestDto);
+    }
+
 }
