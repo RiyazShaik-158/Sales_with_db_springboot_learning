@@ -43,4 +43,10 @@ public class ItemController {
         itemService.addItem(itemRequestDto);
     }
 
+    @PutMapping("/{id}")
+    @Operation(summary = "Update Item")
+    public void updateItem(@PathVariable long id, @RequestBody ItemRequestDto itemRequestDto) {
+        itemService.updateItem(id, itemRequestDto);
+    }
+
 }
