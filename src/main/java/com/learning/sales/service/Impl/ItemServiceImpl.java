@@ -1,5 +1,6 @@
 package com.learning.sales.service.Impl;
 
+import com.learning.sales.dto.Item.ItemRequestDto;
 import com.learning.sales.dto.Item.ItemResponseDto;
 import com.learning.sales.entity.Item;
 import com.learning.sales.exception.CustomerNotFoundError;
@@ -27,6 +28,14 @@ public class ItemServiceImpl implements ItemService {
     public ItemResponseDto getItemById(long id) {
         Item item = itemRepo.findById(id).orElseThrow(() -> new CustomerNotFoundError("Item not found with id: " + id));
         return mapToDto(item);
+    }
+
+    @Override
+    public void addItem(ItemRequestDto itemRequestDto) {
+        Item newItem = new Item();
+        newItem.setName(itemRequestDto.getName());
+        newItem.setDescription(itemRequestDto.getDescription());
+        itemRepo.save(newItem);
     }
 
     public ItemResponseDto mapToDto(Item item) {
