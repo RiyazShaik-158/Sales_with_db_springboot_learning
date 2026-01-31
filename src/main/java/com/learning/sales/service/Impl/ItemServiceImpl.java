@@ -26,8 +26,8 @@ public class ItemServiceImpl implements ItemService {
 
     @Override
     public ItemResponseDto getItemById(long id) {
-        Item item = itemRepo.findById(id).orElseThrow(() -> new CustomerNotFoundError("Item not found with id: " + id));
-        return mapToDto(item);
+        Item wantedItem = itemFinder(id);
+        return mapToDto(wantedItem);
     }
 
     @Override
@@ -40,10 +40,23 @@ public class ItemServiceImpl implements ItemService {
 
     @Override
     public void updateItem(long id, ItemRequestDto itemRequestDto) {
-        Item requestedItem = itemRepo.findById(id).orElseThrow(() -> new CustomerNotFoundError("Item not found with id: " + id));
+        Item requestedItem = itemFinder(id);
         requestedItem.setName(itemRequestDto.getName());
         requestedItem.setDescription(itemRequestDto.getDescription());
         itemRepo.save(requestedItem);
+    }
+
+    @Override
+    public void deleteItem(long id) {
+        if(itemRepo.existsById(id)) {
+            itemRepo.deleteById(id);
+        } else {
+            throw new CustomerNotFoundError("Item not found with id: " + id);
+        }
+    }
+
+    private Item itemFinder (long id) {
+        return itemRepo.findById(id).orElseThrow(() -> new CustomerNotFoundError("Item not found with id: " + id));
     }
 
     public ItemResponseDto mapToDto(Item item) {
