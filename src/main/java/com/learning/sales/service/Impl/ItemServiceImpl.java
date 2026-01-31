@@ -38,6 +38,14 @@ public class ItemServiceImpl implements ItemService {
         itemRepo.save(newItem);
     }
 
+    @Override
+    public void updateItem(long id, ItemRequestDto itemRequestDto) {
+        Item requestedItem = itemRepo.findById(id).orElseThrow(() -> new CustomerNotFoundError("Item not found with id: " + id));
+        requestedItem.setName(itemRequestDto.getName());
+        requestedItem.setDescription(itemRequestDto.getDescription());
+        itemRepo.save(requestedItem);
+    }
+
     public ItemResponseDto mapToDto(Item item) {
         return new ItemResponseDto(item.getId(), item.getName(), item.getDescription());
     }

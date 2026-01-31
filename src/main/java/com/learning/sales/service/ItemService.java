@@ -11,4 +11,6 @@ public interface ItemService {
     ItemResponseDto getItemById(long id);
 
     void addItem(ItemRequestDto itemRequestDto);
+
+    void updateItem(long id, ItemRequestDto itemRequestDto);
 }
