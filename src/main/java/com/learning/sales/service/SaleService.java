@@ -1,5 +1,6 @@
 package com.learning.sales.service;
 
+import com.learning.sales.dto.Sales.SalesRequestDto;
 import com.learning.sales.dto.Sales.SalesResponseDto;
 
 import java.util.List;
@@ -13,4 +14,11 @@ public interface SaleService {
     List<SalesResponseDto> getSalesByCustomerId (long customerId);
 
     List<SalesResponseDto> getSalesByItemId (long itemId);
+
+    void addSales(SalesRequestDto salesRequestDto);
+
+    void editSales(long id, SalesRequestDto salesRequestDto);
+
+    void deleteSales(long id);
 }
+
