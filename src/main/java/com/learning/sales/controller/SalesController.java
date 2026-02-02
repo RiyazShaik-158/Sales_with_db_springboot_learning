@@ -1,5 +1,6 @@
 package com.learning.sales.controller;
 
+import com.learning.sales.dto.Sales.SalesRequestDto;
 import com.learning.sales.dto.Sales.SalesResponseDto;
 import com.learning.sales.service.SaleService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -46,5 +47,26 @@ public class SalesController {
     @ResponseStatus(HttpStatus.OK)
     public List<SalesResponseDto> getSalesByItemId(@PathVariable long id) {
         return saleService.getSalesByItemId(id);
+    }
+
+    @PostMapping
+    @Operation(summary = "Add Sales")
+    @ResponseStatus(HttpStatus.CREATED)
+    public void addSales(@RequestBody SalesRequestDto salesRequestDto) {
+        saleService.addSales(salesRequestDto);
+    }
+
+    @PutMapping("/{id}")
+    @Operation(summary = "Edit Sales")
+    @ResponseStatus(HttpStatus.OK)
+    public void editSales(@PathVariable long id, @RequestBody SalesRequestDto salesRequestDto) {
+        saleService.editSales(id, salesRequestDto);
+    }
+
+    @DeleteMapping("/{id}")
+    @Operation(summary = "Delete Sales")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteSales(@PathVariable long id) {
+        saleService.deleteSales(id);
     }
 }
