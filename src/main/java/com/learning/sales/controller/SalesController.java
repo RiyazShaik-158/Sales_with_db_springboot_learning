@@ -1,5 +1,6 @@
 package com.learning.sales.controller;
 
+import com.learning.sales.dto.Sales.SalesByItemResponseDto;
 import com.learning.sales.dto.Sales.SalesRequestDto;
 import com.learning.sales.dto.Sales.SalesResponseDto;
 import com.learning.sales.service.SaleService;
@@ -38,14 +39,14 @@ public class SalesController {
     @GetMapping("/customer/{id}")
     @Operation(summary = "Get Sales By Customer")
     @ResponseStatus(HttpStatus.OK)
-    public List<SalesResponseDto> getSalesByCustomerId(@PathVariable long id) {
+    public List<SalesByItemResponseDto> getSalesByCustomerId(@PathVariable long id) {
         return saleService.getSalesByCustomerId(id);
     }
 
     @GetMapping("/item/{id}")
     @Operation(summary = "Get Sales by Item")
     @ResponseStatus(HttpStatus.OK)
-    public List<SalesResponseDto> getSalesByItemId(@PathVariable long id) {
+    public List<SalesByItemResponseDto> getSalesByItemId(@PathVariable long id) {
         return saleService.getSalesByItemId(id);
     }
 
