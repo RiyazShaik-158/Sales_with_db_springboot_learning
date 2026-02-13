@@ -1,5 +1,7 @@
 package com.learning.sales.service;
 
+import com.learning.sales.dto.Sales.SalesByCustomerResponseDto;
+import com.learning.sales.dto.Sales.SalesByItemResponseDto;
 import com.learning.sales.dto.Sales.SalesRequestDto;
 import com.learning.sales.dto.Sales.SalesResponseDto;
 
@@ -11,9 +13,9 @@ public interface SaleService {
 
     SalesResponseDto getSalesById(long id);
 
-    List<SalesResponseDto> getSalesByCustomerId (long customerId);
+    List<SalesByItemResponseDto> getSalesByCustomerId (long customerId);
 
-    List<SalesResponseDto> getSalesByItemId (long itemId);
+    List<SalesByItemResponseDto> getSalesByItemId (long itemId);
 
     void addSales(SalesRequestDto salesRequestDto);
 

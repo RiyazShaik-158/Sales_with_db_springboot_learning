@@ -1,5 +1,7 @@
 package com.learning.sales.service.Impl;
 
+import com.learning.sales.dto.Sales.SalesByCustomerResponseDto;
+import com.learning.sales.dto.Sales.SalesByItemResponseDto;
 import com.learning.sales.dto.Sales.SalesRequestDto;
 import com.learning.sales.dto.Sales.SalesResponseDto;
 import com.learning.sales.entity.Sale;
@@ -37,18 +39,18 @@ public class SaleServiceImpl implements SaleService {
     }
 
     @Override
-    public List<SalesResponseDto> getSalesByCustomerId(long customerId) {
+    public List<SalesByItemResponseDto> getSalesByCustomerId(long customerId) {
         if(salesRepo.salesExistsByCustomerId(customerId)) {
-            return salesRepo.findByCustomerId(customerId).stream().map((SaleServiceImpl::mapEntityToResponse)).toList();
+            return salesRepo.getSalesByCustomerId(customerId);
         } else {
             throw new CustomerNotFoundError("Sales not found with customer id: " + customerId);
         }
     }
 
     @Override
-    public List<SalesResponseDto> getSalesByItemId(long itemId) {
+    public List<SalesByItemResponseDto> getSalesByItemId(long itemId) {
         if(salesRepo.salesExistsByItemId(itemId)) {
-            return salesRepo.findByItemId(itemId).stream().map((SaleServiceImpl::mapEntityToResponse)).toList();
+            return salesRepo.getSalesByItemId(itemId);
         } else {
             throw new CustomerNotFoundError("Sales not found with item id: " + itemId);
         }
