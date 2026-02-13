@@ -1,5 +1,7 @@
 package com.learning.sales.repo;
 
+import com.learning.sales.dto.Sales.SalesByCustomerResponseDto;
+import com.learning.sales.dto.Sales.SalesByItemResponseDto;
 import com.learning.sales.entity.Sale;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -21,4 +23,10 @@ public interface SalesRepo extends JpaRepository<Sale, Long> {
 
     @Query("SELECT COUNT(s) > 0 FROM Sale s WHERE s.item_id = :item_id")
     Boolean salesExistsByItemId(long item_id);
+
+    @Query(value = "SELECT c.name as customerName, i.name as itemName, s.quantity, s.price from item i left join sale s on i.id = s.item_id left join customer c on s.customer_id = c.id where i.id = :itemId", nativeQuery = true)
+    List<SalesByItemResponseDto> getSalesByItemId(long itemId);
+
+    @Query(value = "SELECT c.name as customerName, i.name as itemName, s.quantity, s.price from item i left join sale s on i.id = s.item_id left join customer c on s.customer_id = c.id where c.id = :customerId", nativeQuery = true)
+    List<SalesByItemResponseDto> getSalesByCustomerId(long customerId);
 }
