@@ -94,6 +94,11 @@ public class SaleServiceImpl implements SaleService {
 
     }
 
+    @Override
+    public List<SalesByItemResponseDto> getAllSalesWithCustomerAndItem() {
+        return salesRepo.getSalesWithCustomerAndItem();
+    }
+
     public void checkItemAndCustomerExistence (SalesRequestDto salesRequestDto) {
         long requestedItemId = salesRequestDto.getItemId();
         long requestedCustomerId = salesRequestDto.getCustomerId();

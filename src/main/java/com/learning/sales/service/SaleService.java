@@ -22,5 +22,7 @@ public interface SaleService {
     void editSales(long id, SalesRequestDto salesRequestDto);
 
     void deleteSales(long id);
+
+    List<SalesByItemResponseDto> getAllSalesWithCustomerAndItem();
 }
 
