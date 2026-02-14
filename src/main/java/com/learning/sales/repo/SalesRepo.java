@@ -29,4 +29,8 @@ public interface SalesRepo extends JpaRepository<Sale, Long> {
 
     @Query(value = "SELECT c.name as customerName, i.name as itemName, s.quantity, s.price from item i left join sale s on i.id = s.item_id left join customer c on s.customer_id = c.id where c.id = :customerId", nativeQuery = true)
     List<SalesByItemResponseDto> getSalesByCustomerId(long customerId);
+
+    @Query(value = "select c.name as CustomerName, i.name as ItemName, s.quantity as Quantity, s.price as Price from customer c left join sale s on c.id = s.customer_id left join item i on s.item_id = i.id order by c.name", nativeQuery = true)
+    List<SalesByItemResponseDto> getSalesWithCustomerAndItem();
+
 }
