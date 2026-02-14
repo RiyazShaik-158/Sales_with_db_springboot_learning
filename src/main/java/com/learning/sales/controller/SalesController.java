@@ -25,8 +25,8 @@ public class SalesController {
     @GetMapping
     @Operation(summary = "Get All Sales")
     @ResponseStatus(HttpStatus.OK)
-    public List<SalesResponseDto> getAllSales() {
-        return saleService.getAllSales();
+    public List<SalesByItemResponseDto> getAllSales() {
+        return saleService.getAllSalesWithCustomerAndItem();
     }
 
     @GetMapping("/{id}")
