@@ -29,11 +29,6 @@ public class SaleServiceImpl implements SaleService {
     }
 
     @Override
-    public List<SalesResponseDto> getAllSales() {
-        return salesRepo.findAll().stream().map(SaleServiceImpl::mapEntityToResponse).toList();
-    }
-
-    @Override
     public SalesResponseDto getSalesById(long id) {
         return mapEntityToResponse(salesRepo.findById(id).orElseThrow(() -> new CustomerNotFoundError("Sales not found with id: " + id)));
     }

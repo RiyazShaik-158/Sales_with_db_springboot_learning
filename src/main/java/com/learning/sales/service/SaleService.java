@@ -9,8 +9,6 @@ import java.util.List;
 
 public interface SaleService {
 
-    List<SalesResponseDto> getAllSales();
-
     SalesResponseDto getSalesById(long id);
 
     List<SalesByItemResponseDto> getSalesByCustomerId (long customerId);
