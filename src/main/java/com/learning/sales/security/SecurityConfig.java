@@ -16,11 +16,11 @@ public class SecurityConfig {
     @Bean
     public InMemoryUserDetailsManager userDetailsManager() {
 
-        UserDetails John = User.builder().username("John").password("{noop}test123").roles("EMPLOYEE").build();
+        UserDetails John = User.builder().username("john").password("{noop}test123").roles("EMPLOYEE").build();
 
-        UserDetails Mary = User.builder().username("Mary").password("{noop}test123").roles("EMPLOYEE","MANAGER").build();
+        UserDetails Mary = User.builder().username("mary").password("{noop}test123").roles("EMPLOYEE","MANAGER").build();
 
-        UserDetails Susan = User.builder().username("Susan").password("{noop}test123").roles("EMPLOYEE","MANAGER","ADMIN").build();
+        UserDetails Susan = User.builder().username("susan").password("{noop}test123").roles("EMPLOYEE","MANAGER","ADMIN").build();
 
         return new InMemoryUserDetailsManager(John, Mary, Susan);
     }
